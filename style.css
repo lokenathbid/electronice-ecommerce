@@ -1,0 +1,29 @@
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+/* Smooth fade animation for page switching */
+.fade-in { 
+    animation: fadeIn 0.3s ease-in-out; 
+}
+
+@keyframes fadeIn { 
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    } 
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    } 
+}
+
+/* Hide sections by default */
+.page-section { 
+    display: none; 
+}
+
+/* Show active section */
+.page-section.active { 
+    display: block; 
+}

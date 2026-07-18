@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroNice | Premium Electronics</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 flex flex-col min-h-screen">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="bg-blue-600 p-2 rounded-xl shadow-lg shadow-blue-600/20">
+                        <i data-lucide="zap" class="h-6 w-6 text-white"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-slate-900">ElectroNice</span>
+                </div>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" onclick="navigateTo('home')" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Shop</a>
+                    <a href="#" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Brands</a>
+                    <a href="#" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">Support</a>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <div class="relative cursor-pointer group" onclick="navigateTo('cart')">
+                        <div class="p-2 rounded-full hover:bg-slate-100 transition-colors">
+                            <i data-lucide="shopping-cart" class="h-6 w-6 text-slate-600 group-hover:text-blue-600"></i>
+                        </div>
+                        <span id="cart-badge" class="absolute top-0 right-0 bg-red-500 text-white text-[11px] font-bold h-5 w-5 rounded-full flex items-center justify-center transform scale-0 transition-transform duration-200">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="home-page" class="page-section active fade-in flex-grow">
+        
+        <div class="bg-slate-900 overflow-hidden relative">
+            <div class="max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-2xl">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-500/10 text-blue-400 text-sm font-semibold mb-6 border border-blue-500/20">Winter Collection 2025</span>
+                    <h1 class="text-5xl font-extrabold text-white sm:text-7xl tracking-tight mb-8 leading-tight">
+                        Future Tech. <br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Available Today.</span>
+                    </h1>
+                    <p class="text-xl text-slate-400 mb-10 leading-relaxed">
+                        Upgrade your lifestyle with our curated selection of premium audio gear and smart wearables.
+                    </p>
+                    <button onclick="scrollToGrid()" class="bg-blue-600 hover:bg-blue-500 text-white px-10 py-4 rounded-full font-semibold transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50">
+                        Explore Products
+                    </button>
+                </div>
+            </div>
+            <div class="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-blue-900/30 via-slate-900/50 to-slate-900 pointer-events-none"></div>
+        </div>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" id="shop-grid">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-900">Featured Products</h2>
+                    <p class="text-slate-500 mt-2">Hand-picked by our tech experts.</p>
+                </div>
+            </div>
+
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            </div>
+        </main>
+    </div>
+
+    <div id="cart-page" class="page-section fade-in flex-grow bg-white">
+        <div class="max-w-4xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold text-slate-900 mb-8">Your Shopping Cart</h1>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="flex-1">
+                    <div id="cart-items-container" class="space-y-6">
+                    </div>
+                    
+                    <div id="empty-cart-msg" class="hidden text-center py-20 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        <i data-lucide="shopping-bag" class="h-12 w-12 mx-auto text-slate-400 mb-4"></i>
+                        <p class="text-slate-600 text-lg">Your cart is empty.</p>
+                        <button onclick="navigateTo('home')" class="mt-4 text-blue-600 font-medium hover:underline">Continue Shopping</button>
+                    </div>
+                </div>
+
+                <div class="lg:w-96">
+                    <div class="bg-slate-50 rounded-2xl p-8 border border-slate-200 sticky top-24">
+                        <h2 class="text-lg font-bold text-slate-900 mb-6">Order Summary</h2>
+                        
+                        <div class="space-y-4 mb-6 pb-6 border-b border-slate-200">
+                            <div class="flex justify-between text-slate-600">
+                                <span>Subtotal</span>
+                                <span id="cart-subtotal">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span>Shipping</span>
+                                <span class="text-green-600 font-medium">Free</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span>Tax (Estimated)</span>
+                                <span id="cart-tax">$0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between text-xl font-bold text-slate-900 mb-8">
+                            <span>Total</span>
+                            <span id="cart-total">$0.00</span>
+                        </div>
+
+                        <button onclick="alert('Proceeding to Checkout... (This is just a demo by Bid)')" class="w-full bg-black text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2">
+                            Checkout <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                        
+                        <p class="text-xs text-center text-slate-400 mt-4">
+                            <i data-lucide="lock" class="w-3 h-3 inline mr-1"></i> Secure Checkout
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-300 pt-16 pb-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="bg-blue-600 p-1.5 rounded-lg">
+                            <i data-lucide="zap" class="h-5 w-5 text-white"></i>
+                        </div>
+                        <span class="font-bold text-xl text-white">ElectroNice</span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        The world's premiere destination for high-fidelity audio and smart wearables. Built for the future.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4">Shop</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Headphones</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Speakers</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Watches</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Accessories</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4">Company</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4">Stay Updated</h3>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Enter Email: bidlokenath@gmail.com" class="bg-slate-800 border-none rounded-lg px-4 py-2 w-full text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500">© 2025 ElectroNice Inc. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-white transition-colors"></i>
+                    <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-white transition-colors"></i>
+                    <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-white transition-colors"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
